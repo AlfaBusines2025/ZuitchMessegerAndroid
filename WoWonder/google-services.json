@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "764515806864",
+    "project_id": "zuitch-264ca",
+    "storage_bucket": "zuitch-264ca.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764515806864:android:703e66056103343cb9f215",
+        "android_client_info": {
+          "package_name": "com.zuitch.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTlScluXVo46j0knj26O-4w2ny2duXA8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
