@@ -1,6 +1,8 @@
 ﻿using Android.OS;
 using Android.Views;
 using Android.Webkit;
+using Android.Util;
+using System;
 using System.Reflection;
 using WoWonder.Helpers.Model;
 
@@ -19,13 +21,13 @@ namespace WoWonder.Activities.Tab.Fragment
             var root = inflater.Inflate(Resource.Layout.fragment_home, container, false);
             _web = root.FindViewById<WebView>(Resource.Id.web_home);
 
-            DumpUserDetails();   // imprime todas las variables
-            InitWebView();       // configura y carga la página
+            DumpUserDetails();   // valores en Output y Logcat
+            InitWebView();       // autocookie + carga del sitio
 
             return root;
         }
 
-        /* ---------- helpers ---------- */
+        /* ---------- Helpers ---------- */
 
         private void DumpUserDetails()
         {
@@ -33,7 +35,7 @@ namespace WoWonder.Activities.Tab.Fragment
                      .GetFields(BindingFlags.Public | BindingFlags.Static))
             {
                 var v = f.GetValue(null) ?? "null";
-                Android.Util.Log.Info(LogTag, $"{f.Name} = {v}");
+                Log.Info(LogTag, $"{f.Name} = {v}");
                 System.Diagnostics.Debug.WriteLine($"{LogTag}: {f.Name} = {v}");
             }
         }
@@ -47,22 +49,33 @@ namespace WoWonder.Activities.Tab.Fragment
             // Mantener toda la navegación dentro del WebView
             _web.SetWebViewClient(new InsideClient());
 
-            _web.LoadUrl(BaseUrl);
+            // Si disponemos de token ⇒ llamar al endpoint que crea la cookie
+            if (!string.IsNullOrWhiteSpace(UserDetails.AccessToken))
+            {
+                var cookieUrl =
+                    $"{BaseUrl}api/set-browser-cookie" +
+                    $"?url_redirect={Uri.EscapeDataString(BaseUrl)}" +
+                    $"&access_token={UserDetails.AccessToken}";
+
+                Log.Info(LogTag, $"LoadUrl → {cookieUrl}");
+                _web.LoadUrl(cookieUrl);
+            }
+            else
+            {
+                // Sin token: simplemente abre la página y mostrará login
+                _web.LoadUrl(BaseUrl);
+            }
         }
 
         /* ---------- WebViewClient mínimo ---------- */
 
         private class InsideClient : WebViewClient
         {
-            // Para Android ≥ API-24
             public override bool ShouldOverrideUrlLoading(WebView view,
-                                                          IWebResourceRequest request)
-                => false;    // siempre cargar en el WebView
+                                                          IWebResourceRequest request) => false;
 
-            // Para Android < API-24
             public override bool ShouldOverrideUrlLoading(WebView view,
-                                                          string url)
-                => false;
+                                                          string url) => false;
         }
     }
 }
