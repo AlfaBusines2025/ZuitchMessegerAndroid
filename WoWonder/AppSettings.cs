@@ -24,7 +24,7 @@ namespace WoWonder
         //Main Settings >>>>>
         //*********************************************************
         public static string Version = "5.5";
-        public static readonly string ApplicationName = "WoWonder Messenger";
+        public static readonly string ApplicationName = "Zuitch App";
         public static readonly string DatabaseName = "WoWonderMessenger";
 
         // Friend system = 0 , follow system = 1
@@ -65,9 +65,9 @@ namespace WoWonder
 
         //Set Theme Full Screen App
         //*********************************************************
-        public static readonly bool EnableFullScreenApp = false;
+        public static readonly bool EnableFullScreenApp = true;
 
-        public static readonly bool ShowSettingsUpdateManagerApp = false;
+        public static readonly bool ShowSettingsUpdateManagerApp = true;
 
         public static readonly bool ShowSettingsRateApp = true;
         public static readonly int ShowRateAppCount = 5;

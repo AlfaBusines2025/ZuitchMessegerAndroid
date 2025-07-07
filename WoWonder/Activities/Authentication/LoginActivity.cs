@@ -79,8 +79,8 @@ namespace WoWonder.Activities.Authentication
                 InitSocialLogins();
                 InitBackPressed();
 
-                //OneSignal Notification  
-                //====================================== 
+                //OneSignal Notification
+                //======================================
                 if (Build.VERSION.SdkInt >= BuildVersionCodes.Tiramisu)
                 {
                     if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.PostNotifications) == Permission.Granted)
@@ -188,7 +188,7 @@ namespace WoWonder.Activities.Authentication
         {
             try
             {
-                //Get values 
+                //Get values
                 UsernameEditText = FindViewById<EditText>(Resource.Id.usernamefield);
                 PasswordEditText = FindViewById<EditText>(Resource.Id.passwordfield);
                 ProgressBar = FindViewById<ProgressBar>(Resource.Id.progressBar);
@@ -249,7 +249,7 @@ namespace WoWonder.Activities.Authentication
                 //#Facebook
                 if (AppSettings.ShowFacebookLogin)
                 {
-                    //FacebookSdk.SdkInitialize(this); 
+                    //FacebookSdk.SdkInitialize(this);
                     //LoginButton loginButton = new LoginButton(this);
                     ProfileTracker = new FbMyProfileTracker();
                     ProfileTracker.StartTracking();
@@ -757,7 +757,7 @@ namespace WoWonder.Activities.Authentication
                             //    var data = json.ToString();
                             //    var result = JsonConvert.DeserializeObject<FacebookResult>(data);
 
-                            //    //FbEmail = result.Email; 
+                            //    //FbEmail = result.Email;
                             //}
 
                             SetDataLogin(auth);
