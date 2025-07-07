@@ -1,9 +1,9 @@
-//Use DoughouzChecker last version 5.1 to 
-//build your own certifcate 
-//For Full Documention 
+//Use DoughouzChecker last version 5.1 to
+//build your own certifcate
+//For Full Documention
 //https://doughouzlight.com/?onepage-docs=wowonder-android
 //CopyRight DoughouzLight
-//For the accuracy of the icon and logo, please use this website " https://appicon.co/ " and add images according to size in folders " mipmap " 
+//For the accuracy of the icon and logo, please use this website " https://appicon.co/ " and add images according to size in folders " mipmap "
 
 using Android.App;
 using SocketIOClient.Transport;
@@ -22,7 +22,7 @@ namespace WoWonder
         public static readonly string TripleDesAppServiceProvider = "eGx2FbvjEo3j1y2N05FKYY57q/jGQGaAUfd7KZHeNcyxgkTlDoo2F7FCL4TLuvYQVgE9U6LmC2AaX9EwTTE4mgy8pNobgI4rM3X0GrSagsxZtfAYCOHf5w0UkwokGjbEVn/gKx6/ywOFFjxiuzdKyZ08P9WBQgOT0VgGds9ODCj8cdo6rEnT4u6z6ZgCsZaC3Aw7Yly/nD9cMDPyLFQQb7prHHLd4hot06uoetD8cTua0ZfHz+DapVYvdGEvWuFMJ6YqMImseMUG8IC8eX83UwA/+O/MqdhPq3Y8Y4HZRnQAfYaiGz38hphNUkO9gg4OQhzCsiAS6vqMpTmWar4SICb9+BxotvdOGF0L8kEdHRAVM27Rbdh3xeD9E1Pqx8sNqFb8Zmf6cbKgKea8FhFnhJ0/bZu8KrLqgiznsYyoZN2+G/CxMLGMmZJol5GS7dxq0FSb1KcQqFP1YVgSMRRooxak+slWaElSVSyuHD6QcI8CVWRmFE61vGHcttOvYUYM4Z8DmnvBOnXtHghuy5T17eQlrv3G+MukWnF+y6h9as9nVelHpl0jzF1XBnRX9mB72DEu962k9c8HyD92qSnTszVgo8QlYGxSzHayTkjzq93fuFiqjoO17J4NELjv5ENP/Ms3us5AhL3QK/Y64l4WMllx0YOpkthfTG5Atx+G7H2NVf1HepQgmXLWNP1o/ARM5VrehEB1u2cufIDefwGfxbFEb8c1KfTdOXIf1FJJP5mLPIbbo0N4mzjtP2hsBdCASBQLAFupQvYJSwl5LpLi5p0+KJLEm0aqQY9FjSMH9YxOdg+r3+pS5/18xSeb1U5Gy0F0RrpH/O4aQQ220HtGz+BtT1jkhRT3XrfOkWE/PIkyKmTS3zfXuZE45lsFWXu0YU1tc/8dX5Xk85XnGmJLMePXo8w7f2pRScJD0eZCwhpzE93W7V4Trre09xFiwoawDfqDlrxK0nTC4TeE/AdkMIjYM6CqUj8l/TmqxwjOaHDFH0DN794O+NNuZvCOyKCw+h4UHqtrPVk76+uTLeg6704MRM8otXwF929kp2qdc8+djeD4srra1QNBNUCqXzUhwsFF3i7qu+trXw9ZOtEFiLYRRS6ghOopjQKdDGj5UuONkFWiSBXPzDy+LdyivMIxTPtDnOqNWLY4JSpgjQ54rzV4s3uS9/iycEnC8SZ0a830mMSFH15+P45OP5l8mK/xLDK5MrHOo6FIFCbHAQ6xWa2f6yOMZ3mph3yGf1/q4P1yFpI4ZK0xy6EsN1ZRkATiRwWEV9O41SMufRls5y2QvcmIK+NDC4tZML//9Ew8gX3r6m6nn5N28AhKu/b2JONEgi9j8xaZtIY3IWlA5GzOkkLmbC8rBiAaIbG0wdUwpGBor0B8y/bE1Ub9cs79FO+ceQyCEqJFgpiS8kcE/dKY8+NSmMcXGb9u4XZ+0eWkg8pOTVa4lN1uRGv0mjQ/uF3CzZozP8qJFclVOVAA3BchIGaIuGL17vkvN6aeo2UaLqBHkHkOCkMgcOdlBp5J38EUu1RIHRjSQsp6cmZItPryJmulz4JjtTuG7QJxscqvHcMdi4xQaGqkZfcE+HJ38NqTiJE8wjXjaZWFwwwO/59Jjw==";
 
         //Main Settings >>>>>
-        //********************************************************* 
+        //*********************************************************
         public static string Version = "5.5";
         public static readonly string ApplicationName = "WoWonder Messenger";
         public static readonly string DatabaseName = "WoWonderMessenger";
@@ -30,21 +30,21 @@ namespace WoWonder
         // Friend system = 0 , follow system = 1
         public static readonly int ConnectivitySystem = 1;
 
-        public static readonly InitializeWoWonder.ConnectionType ConnectionTypeChat = InitializeWoWonder.ConnectionType.Socket;
-        public static readonly string PortSocketServer = "449";
-        public static readonly TransportProtocol Transport = TransportProtocol.Polling;
+        public static readonly InitializeWoWonder.ConnectionType ConnectionTypeChat = InitializeWoWonder.ConnectionType.RestApi;
+        public static readonly string PortSocketServer = "3000";
+        public static readonly TransportProtocol Transport = TransportProtocol.WebSocket;
 
         //Main Colors >>
         //*********************************************************
         public static readonly string MainColor = Application.Context.GetText(Resource.Color.accent);
-        public static readonly string StoryReadColor = "#808080";
+        public static readonly string StoryReadColor = "#235777";
 
         //Language Settings >> http://www.lingoes.net/en/translator/langcode.htm
         //*********************************************************
         public static bool FlowDirectionRightToLeft = false;
         public static string Lang = ""; //Default language ar_AE
 
-        //Set Language User on site from phone 
+        //Set Language User on site from phone
         public static readonly bool SetLangUser = true;
 
         //Notification Settings >>
@@ -72,8 +72,8 @@ namespace WoWonder
         public static readonly bool ShowSettingsRateApp = true;
         public static readonly int ShowRateAppCount = 5;
 
-        //AdMob >> Please add the code ad in the Here and analytic.xml 
-        //********************************************************* 
+        //AdMob >> Please add the code ad in the Here and analytic.xml
+        //*********************************************************
         public static readonly ShowAds ShowAds = ShowAds.AllUsers;
 
         public static readonly bool RewardedAdvertisingSystem = true;
@@ -97,7 +97,7 @@ namespace WoWonder
         public static readonly string AdAdMobAppOpenKey = "ca-app-pub-5135691635931982/3836425196";
         public static readonly string AdRewardedInterstitialKey = "ca-app-pub-5135691635931982/7476900652";
 
-        //FaceBook Ads >> Please add the code ad in the Here and analytic.xml 
+        //FaceBook Ads >> Please add the code ad in the Here and analytic.xml
         //*********************************************************
         public static readonly bool ShowFbBannerAds = false;
         public static readonly bool ShowFbInterstitialAds = false;
@@ -109,8 +109,8 @@ namespace WoWonder
         public static readonly string AdsFbRewardVideoKey = "250485588986218_554072818627492";
         public static readonly string AdsFbNativeKey = "250485588986218_554706301897477";
 
-        //Ads AppLovin >> Please add the code ad in the Here 
-        //*********************************************************  
+        //Ads AppLovin >> Please add the code ad in the Here
+        //*********************************************************
         public static readonly bool ShowAppLovinBannerAds = false;
         public static readonly bool ShowAppLovinInterstitialAds = false;
         public static readonly bool ShowAppLovinRewardAds = false;
@@ -118,11 +118,11 @@ namespace WoWonder
         public static string AdsAppLovinBannerId = "27de87b390bb5884";
         public static string AdsAppLovinInterstitialId = "7af32ee3997a12d7";
         public static string AdsAppLovinRewardedId = "99d027a690382f70";
-        //********************************************************* 
+        //*********************************************************
 
         //Social Logins >>
         //If you want login with facebook or google you should change id key in the analytic.xml file or AndroidManifest.xml
-        //Facebook >> ../values/analytic.xml .. 
+        //Facebook >> ../values/analytic.xml ..
         //Google >> ../Properties/AndroidManifest.xml .. line 37
         //*********************************************************
         public static readonly bool EnableSmartLockForPasswords = false;
@@ -138,7 +138,7 @@ namespace WoWonder
         //Just replace it with this 5 lines of code
         /*
          <uses-permission android:name="android.permission.READ_CONTACTS" />
-         <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" /> 
+         <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
          */
         public static readonly bool ShowButtonContact = true;
         public static readonly bool InvitationSystem = true;  //Invite friends section
@@ -164,7 +164,7 @@ namespace WoWonder
         public static readonly bool ShowSearchForMessage = true;
 
 
-        //Record Sound Style & Text 
+        //Record Sound Style & Text
         public static readonly bool ShowButtonRecordSound = true;
 
         // Options List Message
@@ -189,7 +189,7 @@ namespace WoWonder
 
         //List Chat >>
         //*********************************************************
-        public static readonly bool EnableChatPage = false; //>> Next update 
+        public static readonly bool EnableChatPage = false; //>> Next update
         public static readonly bool EnableChatGroup = true;
 
         public static readonly bool EnableBroadcast = true;
@@ -217,7 +217,7 @@ namespace WoWonder
         public static readonly bool EnableReplyStory = true;
 
         /// <summary>
-        /// you can edit video using FFMPEG 
+        /// you can edit video using FFMPEG
         /// </summary>
         public static readonly bool EnableVideoEditor = true;
         public static readonly bool EnableVideoCompress = false;
@@ -228,12 +228,12 @@ namespace WoWonder
         /// https://developer.deepar.ai/
         /// you can get api key from here https://prnt.sc/b4MBmwlx-6Bx
         /// </summary>
-        public static readonly string DeepArKey = "aa1ae193d2e97c3f771146b8d066f7445c65fbf1f8f90a5454a0685c6ffee84915a25262bbed348b"; //#New
+        public static readonly string DeepArKey = "e04529938c873ebfec901d15509f088464330b3bc31d8e5b5ad22e8bde53dffb22a147d2c00d7e65"; //#New
 
         //*********************************************************
         /// <summary>
         ///  Currency
-        /// CurrencyStatic = true : get currency from app not api 
+        /// CurrencyStatic = true : get currency from app not api
         /// CurrencyStatic = false : get currency from api (default)
         /// </summary>
         public static readonly bool CurrencyStatic = false;
@@ -263,7 +263,7 @@ namespace WoWonder
         public static readonly ToastTheme ToastTheme = ToastTheme.Default;
         public static readonly ColorMessageTheme ColorMessageTheme = ColorMessageTheme.Default;
 
-        //Bypass Web Errors 
+        //Bypass Web Errors
         //*********************************************************
         public static readonly bool TurnTrustFailureOnWebException = true;
         public static readonly bool TurnSecurityProtocolType3072On = true;
@@ -284,7 +284,7 @@ namespace WoWonder
         public static readonly bool ShowSettingsWallpaper = true;
         public static readonly bool ShowSettingsFingerprintLock = true;
 
-        //Options chat heads (Bubbles) 
+        //Options chat heads (Bubbles)
         //*********************************************************
         public static readonly bool ShowChatHeads = false;
 
