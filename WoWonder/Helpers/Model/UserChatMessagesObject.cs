@@ -8,6 +8,8 @@ namespace WoWonder.Helpers.Model
     {
         public new MediaPlayer MediaPlayer { get; set; }
         public new Timer MediaTimer { get; set; }
+        public string TranslatedText { get; set; }
+        public string DisplayText { get; set; }
     }
 
     public class AdapterModelsClassMessage

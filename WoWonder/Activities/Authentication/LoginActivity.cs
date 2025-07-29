@@ -2,8 +2,10 @@ using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
+using Android.Gms.Auth.Api.SignIn;
 using Android.Gms.Common.Util.Concurrent;
 using Android.OS;
+//using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.Widget;
@@ -13,6 +15,7 @@ using AndroidX.Credentials;
 using Com.Facebook;
 using Com.Facebook.Login;
 using Google.Android.Material.Dialog;
+using Java.Interop;
 using Java.Util.Concurrent;
 using Org.Json;
 using System;
@@ -55,6 +58,10 @@ namespace WoWonder.Activities.Authentication
         private ImageView EyesIcon;
         private string TimeZone = AppSettings.CodeTimeZone;
         private bool IsActiveUser = true;
+
+        // Variables para Google Sign-In
+        private GoogleSignInClient GoogleSignInClient;
+        private const int RC_SIGN_IN = 9001;
 
         #endregion
 
@@ -290,6 +297,13 @@ namespace WoWonder.Activities.Authentication
                 {
                     GoogleSignInButton = FindViewById<LinearLayout>(Resource.Id.ll_Googlelogin);
                     GoogleSignInButton.Click += GoogleSignInButtonOnClick;
+                    // Configurar Google Sign-In
+                    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DefaultSignIn)
+                        .RequestIdToken(AppSettings.ClientId)
+                        .RequestEmail()
+                        .Build();
+
+                    GoogleSignInClient = GoogleSignIn.GetClient(this, gso);
                 }
                 else
                 {
@@ -352,6 +366,7 @@ namespace WoWonder.Activities.Authentication
                 GetGoogleIdOption googleIdOption = new GetGoogleIdOption.Builder()
                     .SetFilterByAuthorizedAccounts(false)
                     .SetServerClientId(AppSettings.ClientId)
+                    //.SetAutoSelectEnabled(false) 
                     .Build();
 
                 GetCredentialRequest request = new GetCredentialRequest.Builder()
@@ -359,16 +374,41 @@ namespace WoWonder.Activities.Authentication
                     .Build();
 
                 CancellationSignal cancellationSignal = new CancellationSignal();
-                CredentialManager = ICredentialManager.Create(this);
+                CredentialManager ??= ICredentialManager.Create(this);
                 IExecutor executor = ContextCompat.GetMainExecutor(this);
 
                 CredentialManager.GetCredentialAsync(this, request, cancellationSignal, executor, this);
+                Console.WriteLine("Google Credential: " + CredentialManager);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Methods.DisplayReportResultTrack(ex);
+                Methods.DisplayReportResultTrack(exception);
             }
         }
+
+
+        //Login With Google
+        /*  private async void GoogleSignInButtonOnClick(object sender, EventArgs e)
+          {
+              try
+              {
+                  if (GoogleSignInClient == null)
+                  {
+                      Toast.MakeText(this, "Google Sign-In no está configurado correctamente", ToastLength.Long).Show();
+                      return;
+                  }
+
+                  var signInIntent = GoogleSignInClient.SignInIntent;
+                  StartActivityForResult(signInIntent, RC_SIGN_IN);
+              }
+              catch (Exception ex)
+              {
+                  Methods.DisplayReportResultTrack(ex);
+                  Toast.MakeText(this, "Error al iniciar Google Sign-In: " + ex.Message, ToastLength.Long).Show();
+              }
+          }*/
+
+
 
         #endregion
 

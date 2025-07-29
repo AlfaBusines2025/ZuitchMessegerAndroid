@@ -156,6 +156,10 @@ namespace WoWonder.Activities.ChatWindow
                         {
                             ChatWindowContext.OnSelection(null, 0, Activity.GetText(Resource.String.Lbl_Search));
                         }
+                        else if (item?.Id == "9") //Translated the conversation
+                        {
+                            ChatWindowContext.OnSelection(null, 0, Activity.GetText(Resource.String.Lbl_Translate));
+                        }
                     }
                     else if (Page == "GroupChatWindow")
                     {
@@ -300,6 +304,13 @@ namespace WoWonder.Activities.ChatWindow
                             Icon = Resource.Drawable.icon_search_vector,
                         });
                     }
+
+                    MAdapter.ItemOptionList.Add(new Classes.ItemOptionObject()
+                    {
+                        Id = "9",
+                        Text = GetText(Resource.String.Lbl_Translate),
+                        Icon = Resource.Drawable.icon_traductor,
+                    });
                 }
                 else if (Page == "GroupChatWindow")
                 {
