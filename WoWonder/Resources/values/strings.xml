@@ -138,6 +138,7 @@
 	<string name="Lbl_Tab_GroupChats">Groups</string>
 	<string name="Lbl_Tab_Stories">Stories</string>
 	<string name="Lbl_Tab_Calls">Calls</string>
+	<string name="Lbl_Tab_Homei">Home</string>
 	<!--===============================================================-->
 
 	<!--WalkTroutPage-->
@@ -886,7 +887,7 @@
 	<string name="Lbl_ErrorTypePromptGenerate">Type the prompt to generate an image</string>
 	 
 	<string name="Lbl_ChatBot">AI Chat Bot</string>
-	<string name="Lbl_ChatWithChatBot">Chat with AI Chat Bot</string>
+	<!--	<string name="Lbl_ChatWithChatBot">Chat with AI Chat Bot</string>-->
 	<string name="Lbl_StartMessage_ChatBot">"Hi! I&apos;m AI Chat Bot, and I&apos;m here to answer your all questions."</string>
 
 	

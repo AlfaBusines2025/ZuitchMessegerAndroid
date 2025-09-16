@@ -66,20 +66,20 @@ namespace WoWonder.Activities.Tab.Fragment
                 Tab       = view.FindViewById<LinearLayout>(Resource.Id.tabsChat);
 
                 // Asignar controles
-                ButtonHome     = view.FindViewById<LinearLayout>(Resource.Id.llHome);
+               // ButtonHome     = view.FindViewById<LinearLayout>(Resource.Id.llHome);
                 ButtonChats    = view.FindViewById<LinearLayout>(Resource.Id.llChats);
                 ButtonGroups   = view.FindViewById<LinearLayout>(Resource.Id.llGroups);
                 ButtonArchives = view.FindViewById<LinearLayout>(Resource.Id.llArchive);
 
-                TxtHome     = view.FindViewById<TextView>(Resource.Id.ivHome);
+                //TxtHome     = view.FindViewById<TextView>(Resource.Id.ivHome);
                 TxtChats    = view.FindViewById<TextView>(Resource.Id.ivChat);
                 TxtGroups   = view.FindViewById<TextView>(Resource.Id.ivGroups);
                 TxtArchives = view.FindViewById<TextView>(Resource.Id.ivArchive);
 
                 // Eventos
-                if (!ButtonHome.HasOnClickListeners)
+                if (!ButtonChats.HasOnClickListeners)
                 {
-                    ButtonHome.Click     += ButtonHome_Click;
+                    //ButtonHome.Click     += ButtonHome_Click;
                     ButtonChats.Click    += ButtonChats_Click;
                     ButtonGroups.Click   += ButtonGroups_Click;
                     ButtonArchives.Click += ButtonArchives_Click;
@@ -126,7 +126,7 @@ namespace WoWonder.Activities.Tab.Fragment
                 // Abrir por defecto en «Chats» (índice 1)
                 ViewPager.CurrentItem = 0;
                 ResetTabs();
-                ResaltarPestaña(ButtonHome, TxtHome);
+                ResaltarPestaña(ButtonChats, TxtChats);
             }
             catch (Exception e)
             {
@@ -139,13 +139,13 @@ namespace WoWonder.Activities.Tab.Fragment
         /// </summary>
         private void ResetTabs()
         {
-            ButtonHome.SetBackgroundResource(0);
+            //ButtonHome.SetBackgroundResource(0);
             ButtonChats.SetBackgroundResource(0);
             ButtonGroups.SetBackgroundResource(0);
             ButtonArchives.SetBackgroundResource(0);
 
             var normal = Resources.GetColor(Resource.Color.text_color_in_between, null);
-            TxtHome.SetTextColor(normal);
+           // TxtHome.SetTextColor(normal);
             TxtChats.SetTextColor(normal);
             TxtGroups.SetTextColor(normal);
             TxtArchives.SetTextColor(normal);

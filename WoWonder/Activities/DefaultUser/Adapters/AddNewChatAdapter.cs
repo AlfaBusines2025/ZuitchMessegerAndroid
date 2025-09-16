@@ -97,7 +97,7 @@ namespace WoWonder.Activities.DefaultUser.Adapters
                         holder.IconContent.SetImageResource(Resource.Drawable.icon_broadcast_vector);
                     }
                 }
-                else if (item.Type == Classes.ItemType.ChatGpt)
+                /*else if (item.Type == Classes.ItemType.ChatGpt)
                 {
                     if (viewHolder is AddItemOptionAdapterViewHolder holder)
                     {
@@ -105,7 +105,7 @@ namespace WoWonder.Activities.DefaultUser.Adapters
                         holder.IconContent.SetImageResource(Resource.Drawable.icon_chatgpt_vector);
                         holder.IconContent.ImageTintList = ColorStateList.ValueOf(Color.Transparent);
                     }
-                }
+                }*/
                 else
                 {
                     if (viewHolder is AddNewChatAdapterViewHolder holder)

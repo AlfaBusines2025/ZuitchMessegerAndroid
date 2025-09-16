@@ -359,7 +359,7 @@ namespace WoWonder.Activities.Authentication
         }
 
         //Login With Google
-        private void GoogleSignInButtonOnClick(object sender, EventArgs e)
+      /*  private void GoogleSignInButtonOnClick(object sender, EventArgs e)
         {
             try
             {
@@ -384,11 +384,11 @@ namespace WoWonder.Activities.Authentication
             {
                 Methods.DisplayReportResultTrack(exception);
             }
-        }
+        }*/
 
 
         //Login With Google
-        /*  private async void GoogleSignInButtonOnClick(object sender, EventArgs e)
+          private async void GoogleSignInButtonOnClick(object sender, EventArgs e)
           {
               try
               {
@@ -406,7 +406,7 @@ namespace WoWonder.Activities.Authentication
                   Methods.DisplayReportResultTrack(ex);
                   Toast.MakeText(this, "Error al iniciar Google Sign-In: " + ex.Message, ToastLength.Long).Show();
               }
-          }*/
+          }
 
 
 
@@ -679,6 +679,38 @@ namespace WoWonder.Activities.Authentication
         #region Permissions && Result
 
         //Result
+        /*protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            try
+            {     
+                // Logins Facebook
+                MFbCallManager?.OnActivityResult(requestCode, (int)resultCode, data);
+                base.OnActivityResult(requestCode, resultCode, data);
+
+                if (requestCode == RC_SIGN_IN)
+                {
+                    var result = GoogleSignIn.GetSignedInAccountFromIntent(data);
+                    if (result.IsSuccessful)
+                    {
+                        OnResult(result);
+                    }
+                    else
+                    {
+                        // Maneja error
+                        var exception = result.Exception;
+                        Console.WriteLine(exception.Message);
+                    }
+                }
+
+
+                //Log.Debug("Login_Activity", "onActivityResult:" + requestCode + ":" + resultCode + ":" + data);
+            }
+            catch (Exception e)
+            {
+                Methods.DisplayReportResultTrack(e);
+            }
+        }*/
+
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             try
@@ -687,11 +719,45 @@ namespace WoWonder.Activities.Authentication
                 MFbCallManager?.OnActivityResult(requestCode, (int)resultCode, data);
                 base.OnActivityResult(requestCode, resultCode, data);
 
-                //Log.Debug("Login_Activity", "onActivityResult:" + requestCode + ":" + resultCode + ":" + data);
+                if (requestCode == RC_SIGN_IN)
+                {
+                    var task = GoogleSignIn.GetSignedInAccountFromIntent(data);
+                    if (task.IsSuccessful)
+                    {
+                        var account = task.Result;
+                        // Obtén el token de ID de manera segura
+                        object idTokenalod = account;
+                       /* if (string.IsNullOrEmpty(idToken))
+                        {
+                            
+                        }*/
+
+                        // Alternativa si IdToken es nulo
+                        var googleSignInAccount = task.Result as GoogleSignInAccount;
+                        string idToken = googleSignInAccount?.IdToken;
+
+                        if (!string.IsNullOrEmpty(idToken))
+                        {
+                            SetContentGoogle(idToken);
+                        }
+                        else
+                        {
+                            Toast.MakeText(this, "No se pudo obtener el token de Google", ToastLength.Long).Show();
+                        }
+                    }
+                    else
+                    {
+                        // Maneja error
+                        var exception = task.Exception;
+                        Console.WriteLine(exception?.Message);
+                        Toast.MakeText(this, "Error en el inicio de sesión con Google: " + exception?.Message, ToastLength.Long).Show();
+                    }
+                }
             }
             catch (Exception e)
             {
                 Methods.DisplayReportResultTrack(e);
+                Toast.MakeText(this, "Error inesperado: " + e.Message, ToastLength.Long).Show();
             }
         }
 

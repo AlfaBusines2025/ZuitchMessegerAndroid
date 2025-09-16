@@ -4,11 +4,16 @@ using Android.Content.Res;
 using Android.Graphics;
 using Android.Views;
 using Android.Widget;
+using AndroidX.ViewPager.Widget;
+using Com.Google.Android.Gms.Ads.Mediation.Rtb;
 using Q.Rorbin.Badgeview;
 using System;
+using WoWonder.Activities.ChatWindow;
 using WoWonder.Activities.DefaultUser;
 using WoWonder.Activities.SettingsPreferences;
 using WoWonder.Activities.Tab;
+using WoWonder.Activities.Tab.Fragment;
+using WoWonder.Adapters;
 using WoWonder.Helpers.Ads;
 using WoWonderClient.Classes.Call;
 
@@ -18,12 +23,16 @@ namespace WoWonder.Helpers.Utils
     {
         private readonly ChatTabbedMainActivity MainActivity;
 
-        private LinearLayout Tab, ChatLayout, StoryLayout, CallLayout, MoreLayout, AddLayout;
-        private ImageView ImageChat, ImageStory, ImageCall, ImageMore;
+        private LinearLayout Tab,HomeLayout, ChatLayout, StoryLayout, CallLayout, MoreLayout, AddLayout;
+        private ImageView ImageHome, ImageChat, ImageStory, ImageCall, ImageMore;
 
         private ImageView FloatingActionImageView;
 
         private readonly Color UnSelectColor = Color.ParseColor("#dddddd");
+
+
+        private MainTabAdapter TabAdapter;
+        public HomeFragment HomeTab;
 
         public BottomNavigationTabChat(ChatTabbedMainActivity activity)
         {
@@ -49,6 +58,11 @@ namespace WoWonder.Helpers.Utils
                 ChatLayout = MainActivity.FindViewById<LinearLayout>(Resource.Id.llChat);
                 ImageChat = MainActivity.FindViewById<ImageView>(Resource.Id.ivChat);
 
+
+                HomeLayout = MainActivity.FindViewById<LinearLayout>(Resource.Id.llHomeI);
+                ImageHome = MainActivity.FindViewById<ImageView>(Resource.Id.ivHomei);
+
+
                 StoryLayout = MainActivity.FindViewById<LinearLayout>(Resource.Id.llStory);
                 ImageStory = MainActivity.FindViewById<ImageView>(Resource.Id.ivStory);
 
@@ -62,10 +76,14 @@ namespace WoWonder.Helpers.Utils
                 ImageMore = MainActivity.FindViewById<ImageView>(Resource.Id.ivMore);
 
                 ChatLayout?.SetOnClickListener(this);
+                HomeLayout?.SetOnClickListener(this);
                 StoryLayout?.SetOnClickListener(this);
                 AddLayout?.SetOnClickListener(this);
                 CallLayout?.SetOnClickListener(this);
                 MoreLayout?.SetOnClickListener(this);
+
+               // TabAdapter = new MainTabAdapter(this);
+
 
                 float weightSum = 5;
 
@@ -94,17 +112,18 @@ namespace WoWonder.Helpers.Utils
                 ImageStory.SetColorFilter(UnSelectColor);
                 ImageCall.SetColorFilter(UnSelectColor);
                 ImageMore.SetColorFilter(UnSelectColor);
+                ImageHome.SetColorFilter(UnSelectColor);
 
                 switch (index)
                 {
                     //Chat
                     case 0:
                         {
-                            ImageChat.SetColorFilter(Color.ParseColor(AppSettings.MainColor));
+                            ImageChat.SetColorFilter(Color.ParseColor(AppSettings.MainColor));                 
 
-                            MainActivity.ViewPager.SetCurrentItem(0, false);
-
+                            MainActivity.ViewPager.SetCurrentItem(3, false);
                             AdsGoogle.Ad_Interstitial(MainActivity);
+
                             break;
                         }
                     //Story
@@ -125,7 +144,16 @@ namespace WoWonder.Helpers.Utils
                         break;
                     //More
                     case 3:
-
+                        break;
+                    //Home
+                    case 4:
+                        ImageHome.SetColorFilter(Color.ParseColor(AppSettings.MainColor));
+                        MainActivity.ViewPager.SetCurrentItem(0, false);
+                        AdsGoogle.Ad_RewardedVideo(MainActivity);
+                        MainActivity.InAppReview();
+                        break;
+                    //More_tab
+                    case 5:
                         break;
                 }
             }
@@ -143,13 +171,16 @@ namespace WoWonder.Helpers.Utils
 
                 if (showBadge)
                 {
-                    if (id == 0)
+                         if (id == 0)
                         ShowOrHideBadgeViewIcon(MainActivity, ChatLayout, count, true);
                     else if (id == 1)
                         ShowOrHideBadgeViewIcon(MainActivity, StoryLayout, count, true);
                     else if (id == 2)
                         ShowOrHideBadgeViewIcon(MainActivity, CallLayout, count, true);
-                    else if (id == 3) ShowOrHideBadgeViewIcon(MainActivity, MoreLayout, count, true);
+                    else if (id == 3) 
+                        ShowOrHideBadgeViewIcon(MainActivity, MoreLayout, count, true);
+                    else if (id == 4)
+                        ShowOrHideBadgeViewIcon(MainActivity, HomeLayout, count, true);
                 }
                 else if (id == 0)
                 {
@@ -166,6 +197,10 @@ namespace WoWonder.Helpers.Utils
                 else if (id == 3)
                 {
                     ShowOrHideBadgeViewIcon(MainActivity, MoreLayout);
+                }
+                else if (id == 4)
+                {
+                    ShowOrHideBadgeViewIcon(MainActivity, HomeLayout);
                 }
             }
             catch (Exception e)
@@ -237,6 +272,7 @@ namespace WoWonder.Helpers.Utils
                 if (v.Id == ChatLayout.Id)
                 {
                     SelectItem(0);
+
                 }
                 else if (v.Id == StoryLayout?.Id)
                 {
@@ -259,6 +295,11 @@ namespace WoWonder.Helpers.Utils
                 else if (v.Id == AddLayout?.Id)
                 {
                     var intent = new Intent(MainActivity, typeof(AddNewChatActivity));
+                    MainActivity.StartActivity(intent);
+                }
+                else if (v.Id == HomeLayout?.Id)
+                {
+                    var intent = new Intent(MainActivity, typeof(ChatWindowActivity));
                     MainActivity.StartActivity(intent);
                 }
             }
