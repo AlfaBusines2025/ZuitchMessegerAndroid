@@ -9,9 +9,9 @@
 	and the link should example: https://www.demo.com/app-ads.txt -->
 	<!--ADMOB APPLICATION_ID >> ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy-->
 
-	<string name="admob_app_id">ca-app-pub-5135691635931982~1957332004</string>
-	<string name="banner_ad_unit_id">ca-app-pub-5135691635931982/8411893862</string>
-	<string name="banner_multiple_ad_sizes_id">ca-app-pub-5135691635931982/3634209906</string>
+	<string name="admob_app_id">ca-app-pub-5135691635931982~1668785995</string>
+	<string name="banner_ad_unit_id">ca-app-pub-5135691635931982/6967393171</string>
+	<string name="banner_multiple_ad_sizes_id">ca-app-pub-5135691635931982/9873764329</string>
 	<string name="ad_attribution">Ad</string>
 	<!--===============================================================-->
 
@@ -30,6 +30,10 @@
 
 	<!--https://developers.google.com/maps/documentation/maps-static/intro-->
 	<string name="google_maps_key">AIzaSyAM23c3ksFkOLnc5Adw4ne_LQSmZve5cdg</string>
+	
+	<string name="razorpay_api_Key">rzp_test_ruzI7R7AkonOIi</string>
+
+	<string name="com.crashlytics.android.build_id">1</string>
 	<!--===============================================================-->
 
 	<!--applovin-->

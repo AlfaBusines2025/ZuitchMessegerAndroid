@@ -30,6 +30,7 @@
 		<AndroidStripILAfterAOT>False</AndroidStripILAfterAOT>
 		<AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
 		<EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+		<DebugSymbols>False</DebugSymbols>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
@@ -50,6 +51,7 @@
 		<AndroidStripILAfterAOT>True</AndroidStripILAfterAOT>
 		<AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
 		<EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+		<DebugSymbols>True</DebugSymbols>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))=='android'">
 		<!--link path -->

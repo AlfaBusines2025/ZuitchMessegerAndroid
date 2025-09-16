@@ -22,7 +22,7 @@
         android:background="@drawable/bg_tabs_top">
 
         <!-- Home (nueva) -->
-        <LinearLayout
+		<!--  <LinearLayout
             android:id="@+id/llHome"
             android:layout_width="match_parent"
             android:layout_height="37dp"
@@ -41,7 +41,7 @@
                 android:text="@string/Lbl_Home"
                 android:textColor="@color/text_color_in_between" />
         </LinearLayout>
-
+        -->
         <!-- Chats -->
         <LinearLayout
             android:id="@+id/llChats"

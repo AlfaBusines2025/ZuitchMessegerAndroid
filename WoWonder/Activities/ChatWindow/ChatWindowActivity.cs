@@ -11,6 +11,7 @@ using Android.Text.Style;
 using Android.Util;
 using Android.Views;
 using Android.Views.Animations;
+using Android.Views.Translation;
 using Android.Widget;
 using AndroidX.AppCompat.Widget;
 using AndroidX.Core.Content;
@@ -53,6 +54,7 @@ using WoWonder.Helpers.Utils;
 using WoWonder.Library.Anjo;
 using WoWonder.Library.Anjo.IntegrationRecyclerView;
 using WoWonder.Library.Anjo.XRecordView;
+using WoWonder.Services;
 using WoWonder.SQLite;
 using WoWonderClient;
 using WoWonderClient.Classes.Call;
@@ -71,6 +73,11 @@ namespace WoWonder.Activities.ChatWindow
     [Activity(Icon = "@mipmap/icon", Theme = "@style/MyTheme", ConfigurationChanges = ConfigChanges.Locale | ConfigChanges.UiMode | ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
     public class ChatWindowActivity : BaseActivity, IOnRecordClickListener, IOnRecordListener, SwipeReply.ISwipeControllerActions, IDialogListCallBack
     {
+        private FloatingActionButton FabTranslate;
+        private bool IsTranslated = false;
+        private GoogleTranslateService _translator;
+
+
         #region Variables Basic
 
         private static ChatWindowActivity Instance;
@@ -178,6 +185,83 @@ namespace WoWonder.Activities.ChatWindow
                 Methods.DisplayReportResultTrack(e);
             }
         }
+
+        public async Task TranslatedProcessAsync()
+        {
+            IsTranslated = false;
+            _translator = new GoogleTranslateService("AIzaSyAteNzJdMG0TM07uXZKaTy0dGv9LkeZNVs");
+            //FabTranslate = FindViewById<FloatingActionButton>(Resource.Id.fab_translate);
+            await ToggleTranslateMessages();
+        }
+
+
+        private async Task ToggleTranslateMessages()
+        {
+            try
+            {
+                if (MAdapter == null || MAdapter.DifferList == null)
+                    return;
+
+                IsTranslated = !IsTranslated;
+
+                var tasks = new List<Task>();
+
+                foreach (var item in MAdapter.DifferList)
+                {
+                    var message = item.MesData;
+                    if (message == null || string.IsNullOrWhiteSpace(message.Text))
+                        continue;
+
+                    if (IsTranslated)
+                    {
+                        // Solo traducir si no tenemos ya una traducción
+                        if (string.IsNullOrEmpty(message.TranslatedText))
+                        {
+                            tasks.Add(Task.Run(async () =>
+                            {
+                                string translated = await _translator.TranslateTextAsync(
+                                    message.Text, "es", "en");
+                                message.Text = translated;
+                                // Actualizar la UI en el hilo principal
+                                RunOnUiThread(() =>
+                                {
+                                    var position = MAdapter.DifferList.IndexOf(item);
+                                    if (position >= 0)
+                                        MAdapter.NotifyItemChanged(position);
+                                });
+                            }));
+                        }
+                        else
+                        {
+                            message.DisplayText = message.TranslatedText;
+                        }
+                    }
+                    else
+                    {
+                        message.DisplayText = message.Text;
+                    }
+                }
+
+                // Esperar a que todas las traducciones completen
+                await Task.WhenAll(tasks);
+
+                // Actualizar toda la lista si es necesario
+                //RunOnUiThread(() => MAdapter.NotifyDataSetChanged());
+                RunOnUiThread(() =>
+                {
+                    MAdapter.NotifyItemRangeChanged(0, MAdapter.ItemCount);
+                    Console.WriteLine($"First message - Original: {MAdapter.DifferList[0].MesData.Text}");
+                    Console.WriteLine($"First message - Translated: {MAdapter.DifferList[0].MesData.TranslatedText}");
+                    Console.WriteLine($"First message - Display: {MAdapter.DifferList[0].MesData.DisplayText}");
+                });
+            }
+            catch (Exception ex)
+            {
+                Methods.DisplayReportResultTrack(ex);
+            }
+        }
+
+
 
         protected override void OnResume()
         {
@@ -3747,6 +3831,11 @@ namespace WoWonder.Activities.ChatWindow
                 else if (text == GetText(Resource.String.Lbl_View_Profile)) // Menu View profile
                 {
                     OpenProfileClick();
+                }
+                else if (text == GetText(Resource.String.Lbl_Translate)) // Menu Translated
+                {
+                    // OpenProfileClick();
+                    TranslatedProcessAsync();
                 }
                 else if (text == GetText(Resource.String.Lbl_Block)) // Menu Block
                 {

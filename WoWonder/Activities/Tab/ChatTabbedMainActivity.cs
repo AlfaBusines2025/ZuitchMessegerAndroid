@@ -63,6 +63,7 @@ namespace WoWonder.Activities.Tab
         public TabChatFragment ChatTab;
         public LastStoriesFragment LastStoriesTab;
         public LastCallsFragment LastCallsTab;
+        public HomeFragment HomeTab;
 
         private TextView TxtAppName;
         private ImageView DiscoverImageView, SearchImageView, MoreImageView;
@@ -362,12 +363,14 @@ namespace WoWonder.Activities.Tab
                 ChatTab = new TabChatFragment();
                 LastStoriesTab = new LastStoriesFragment(this);
                 LastCallsTab = new LastCallsFragment();
+                HomeTab = new HomeFragment();
 
                 if (TabAdapter is { ItemCount: <= 0 })
                 {
                     TabAdapter.AddFragment(ChatTab, GetText(Resource.String.Lbl_Tab_Chats));
                     TabAdapter.AddFragment(LastStoriesTab, GetText(Resource.String.Lbl_Tab_Stories));
                     TabAdapter.AddFragment(LastCallsTab, GetText(Resource.String.Lbl_Tab_Calls));
+                    TabAdapter.AddFragment(HomeTab, GetText(Resource.String.Lbl_Tab_Homei));
 
                     ViewPager.UserInputEnabled = false;
                     ViewPager.CurrentItem = TabAdapter.ItemCount;
@@ -432,8 +435,16 @@ namespace WoWonder.Activities.Tab
 
                                 break;
                             }
-                        // More_Tab
+                        // Home
                         case 3:
+                            {
+
+                                Activity.BottomNavigationTab.SelectItem(3);
+
+                                break;
+                            }
+                        // More_Tab
+                        case 4:
                             {
 
                                 break;

@@ -13,24 +13,9 @@
 		android:layout_width="match_parent"
 		android:layout_height="55dp"
 		android:layout_gravity="bottom" >
-		<LinearLayout
-			android:id="@+id/llChat"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:gravity="center"
-			android:clickable="true"
-			android:focusable="true"
-			android:background="?attr/selectableItemBackground"
-			android:orientation="vertical">
-			<ImageView
-				android:layout_width="39dp"
-				android:layout_height="39dp"
-				android:padding="6dp"
-				android:id="@+id/ivChat" 
-				android:tint="@color/accent"
-				android:src="@drawable/icon_chats_vector" />
-		</LinearLayout>
+	
+		
+		
 		<LinearLayout
 			android:id="@+id/llStory"
 			android:layout_width="match_parent"
@@ -48,7 +33,10 @@
 				android:id="@+id/ivStory"
 				android:tint="#DDDDDD"
 				android:src="@drawable/icon_stories_vector" />
-		</LinearLayout> 
+		</LinearLayout>
+
+		
+
 		<LinearLayout
 			android:id="@+id/llAdd"
 			android:layout_width="match_parent"
@@ -70,6 +58,51 @@
 				android:src="@drawable/icon_add_circle_vector" />
 			
 		</LinearLayout>
+
+
+
+		<LinearLayout
+		android:id="@+id/llChat"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:gravity="center"
+		android:clickable="true"
+		android:focusable="true"
+		android:background="?attr/selectableItemBackground"
+		android:orientation="vertical">
+			<ImageView
+				android:layout_width="39dp"
+				android:layout_height="39dp"
+				android:padding="6dp"
+				android:layout_gravity="center"
+				android:id="@+id/ivChat"
+			    android:tint="#235777"
+				android:src="@drawable/ic_world" />
+			
+		</LinearLayout>
+		
+		
+
+		
+		<LinearLayout
+			android:id="@+id/llHomeI"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:clickable="true"
+			android:focusable="false"
+			android:background="?attr/selectableItemBackground"
+			android:orientation="vertical">
+			<ImageView
+				android:layout_width="39dp"
+				android:layout_height="39dp"
+				android:padding="6dp"
+				android:id="@+id/ivHomei" 
+				android:src="@drawable/icon_chats_vector" />
+		</LinearLayout>
+		 
 		<LinearLayout
 			android:id="@+id/llCall"
 			android:layout_width="match_parent"

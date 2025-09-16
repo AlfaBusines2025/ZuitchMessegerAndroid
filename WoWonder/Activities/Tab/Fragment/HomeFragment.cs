@@ -70,11 +70,12 @@ namespace WoWonder.Activities.Tab.Fragment
 
         /* ---------- WebView ---------- */
 
-        private void InitWebView()
+        public void InitWebView()
         {
             var st = _web.Settings;
             st.JavaScriptEnabled = true;
             st.DomStorageEnabled = true;
+            _web.AddJavascriptInterface(new WebAppInterface(this), "AndroidInterface");  // ← Aquí
 
             _web.SetWebViewClient(new InsideClient());
             _web.SetWebChromeClient(new MediaChrome(this));
@@ -84,7 +85,8 @@ namespace WoWonder.Activities.Tab.Fragment
                 : BaseUrl;
 
             Log.Info(LogTag, $"LoadUrl → {startUrl}");
-            _web.LoadUrl(startUrl);
+            _web.LoadUrl(startUrl);          
+
         }
 
         private class InsideClient : WebViewClient
@@ -93,7 +95,74 @@ namespace WoWonder.Activities.Tab.Fragment
                                                           IWebResourceRequest request) => false;
             public override bool ShouldOverrideUrlLoading(WebView view,
                                                           string url) => false;
+            public override void OnReceivedError(WebView view, IWebResourceRequest request, WebResourceError error)
+            {
+                if (request.IsForMainFrame)
+                {
+                    ShowCustomErrorPage(view);
+                }
+            }
+
+            public override void OnReceivedHttpError(WebView view, IWebResourceRequest request, WebResourceResponse errorResponse)
+            {
+                if (request.IsForMainFrame)
+                {
+                    ShowCustomErrorPage(view);
+                }
+            }
+
+            private void ShowCustomErrorPage(WebView view)
+            {
+                string htmlData = @"
+            <html>
+                <head>
+                    <style>
+                        body { 
+                            background-color: #f5f5f5; 
+                            display: flex; 
+                            justify-content: center; 
+                            align-items: center; 
+                            height: 100vh; 
+                            flex-direction: column;
+                            font-family: sans-serif;
+                        }
+                        img {
+                            width: 120px;
+                            margin-bottom: 20px;
+                        }
+                button {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 12px 24px;
+                        font-size: 16px;
+                        font-weight: bold;
+                        background-color: #72b0be;
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+                        transition: background-color 0.3s ease;
+                    }
+                        h2 {
+                            color: #555;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <img src='file:///android_asset/zuitch_logo.png' />
+                    <button onclick='AndroidInterface.reloadWebView()'>Recargar</button>
+                </body>
+            </html>";
+
+                view.LoadDataWithBaseURL(null, htmlData, "text/html", "UTF-8", null);
+            }
+
         }
+
+
+
 
         private class MediaChrome : WebChromeClient
         {
